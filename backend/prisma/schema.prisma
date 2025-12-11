@@ -1,0 +1,91 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Court {
+  id        Int      @id @default(autoincrement())
+  name      String
+  type      String   // "indoor" or "outdoor"
+  basePrice Float    @default(20.0)
+  isActive  Boolean  @default(true)
+  bookings  Booking[]
+}
+
+model Equipment {
+  id            Int               @id @default(autoincrement())
+  name          String
+  totalQuantity Int
+  price         Float
+  bookings      BookingEquipment[]
+}
+
+model Coach {
+  id       Int       @id @default(autoincrement())
+  name     String
+  price    Float
+  isActive Boolean   @default(true)
+  bookings Booking[]
+}
+
+model PricingRule {
+  id         Int      @id @default(autoincrement())
+  name        String
+  type       String    // peak | weekend | court_type
+  multiplier Float?
+  surcharge  Float?
+  isActive   Boolean   @default(true)
+
+  // For peak hours
+  startHour  Int?
+  endHour    Int?
+
+  // For weekend — FIXED: no more Int[]? error
+  daysOfWeek Int[]     @default([])       // THIS IS THE FIX
+
+  // For court type
+  courtType  String?
+}
+
+model Booking {
+  id             Int               @id @default(autoincrement())
+  userId         Int
+  user           User              @relation(fields: [userId], references: [id])
+  courtId        Int
+  court          Court             @relation(fields: [courtId], references: [id])
+  coachId        Int?
+  coach          Coach?            @relation(fields: [coachId], references: [id])
+  startTime      DateTime
+  endTime        DateTime
+  status         String            @default("confirmed")
+  totalPrice     Float
+  priceBreakdown Json
+  equipments     BookingEquipment[]
+  createdAt      DateTime          @default(now())
+}
+
+
+model BookingEquipment {
+  bookingId     Int
+  equipmentId   Int
+  quantity      Int
+
+  booking       Booking    @relation(fields: [bookingId], references: [id])
+  equipment     Equipment  @relation(fields: [equipmentId], references: [id])
+
+  @@id([bookingId, equipmentId])
+}
+model User {
+  id       Int      @id @default(autoincrement())
+  name     String
+  email    String   @unique
+  password String
+  role     String   // "user" or "admin"
+  bookings Booking[]
+  createdAt DateTime @default(now())
+}
