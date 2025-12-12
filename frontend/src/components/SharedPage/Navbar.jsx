@@ -18,13 +18,13 @@ export default function Navbar() {
     <header className="h-16 bg-white shadow-sm fixed top-0 left-0 right-0 z-50 border-b">
       <div className="flex items-center justify-between h-full px-6">
 
-        {/* LEFT: Logo - Always pinned to left edge */}
+       
         <Link to="/" className="flex items-center gap-2 font-bold text-2xl text-indigo-600">
           <span className="text-4xl">🏸</span>
           <span>SmashBook</span>
         </Link>
 
-        {/* CENTER: Search bar only when logged in */}
+        
         {user && token && (
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-xl px-6">
             <input
@@ -35,7 +35,7 @@ export default function Navbar() {
           </div>
         )}
 
-        {/* RIGHT: Auth buttons or User + Logout - Always pinned to right edge */}
+        
         <div className="flex items-center gap-6">
           {user && token ? (
             <>
@@ -68,7 +68,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* This makes the content shift right only when sidebar exists (logged in) */}
+      
       <div className={`h-16 ${user && token ? "ml-56" : ""}`} />
     </header>
   );

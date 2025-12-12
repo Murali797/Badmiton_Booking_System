@@ -18,11 +18,11 @@ module.exports = function calculatePrice({
 
   const durationHours = (end - start) / (1000 * 60 * 60);
 
-  // Base court price
+ 
   breakdown.courtBase = court.basePrice * durationHours;
   total += breakdown.courtBase;
 
-  // Apply pricing rules
+  //pricing rules
   pricingRules.forEach(rule => {
     if (rule.type === "peak") {
       if (start.getHours() >= rule.startHour && end.getHours() <= rule.endHour) {
@@ -50,7 +50,7 @@ module.exports = function calculatePrice({
     }
   });
 
-  // Equipment cost
+
   equipments.forEach(item => {
     const eqPrice = item.equipment.price * item.quantity;
     total += eqPrice;
@@ -61,7 +61,7 @@ module.exports = function calculatePrice({
     });
   });
 
-  // Coach fee
+
   if (coach) total += coach.price;
 
   return { total, breakdown };

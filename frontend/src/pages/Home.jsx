@@ -1,4 +1,4 @@
-// In your Home.jsx – update the buttons like this:
+
 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -20,13 +20,13 @@ export default function Home() {
   
 
   const handleSignUp = () => {
-    navigate("/auth", { state: { register: true } }); // optional: pre-select register tab
+    navigate("/auth", { state: { register: true } }); 
   };
 
   return (
     <div className="min-h-screen  from-indigo-50 via-white to-purple-50">
       <div>
-        {/* Hero */}
+        
         <section className="pt-24 pb-16 px-6 text-center">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
@@ -54,8 +54,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Final CTA */}
-        {/* Final CTA – Truly Full-Bleed Background (No White Gap on Sides) */}
+       
 <section className="py-20 bg-indigo-600 text-center text-white -mx-6 md:-mx-12 lg:-mx-24 xl:-mx-32 2xl:mx-0">
   <div className="max-w-4xl mx-auto px-6">
     <h2 className="text-4xl md:text-5xl font-bold mb-6">

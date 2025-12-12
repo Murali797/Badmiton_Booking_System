@@ -16,11 +16,11 @@ module.exports = async (req, res, next) => {
       return res.status(400).json({ error: "End time must be after start time" });
     }
 
-    // 1. Court exists?
+  
     const court = await prisma.court.findUnique({ where: { id: courtId } });
     if (!court) return res.status(400).json({ error: "Court not found" });
 
-    // 2. Prevent overlapping bookings
+    
     const overlaps = await prisma.booking.findFirst({
       where: {
         courtId,

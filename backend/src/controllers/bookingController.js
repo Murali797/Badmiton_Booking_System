@@ -1,9 +1,7 @@
-// backend/src/controllers/bookingController.js
+
 const prisma = require("../config/db");
 
-// ------------------------------
-// PRICE CALCULATION
-// ------------------------------
+
 const calculatePrice = async ({ court, coach, equipments, startTime }) => {
   let total = court.basePrice;
   const breakdown = {
@@ -15,7 +13,7 @@ const calculatePrice = async ({ court, coach, equipments, startTime }) => {
 
   const date = new Date(startTime);
   const hour = date.getHours();
-  const day = date.getDay(); // 0 = Sunday
+  const day = date.getDay(); 
 
   const rules = await prisma.pricingRule.findMany({ where: { isActive: true } });
 
@@ -56,9 +54,7 @@ const calculatePrice = async ({ court, coach, equipments, startTime }) => {
   return { total, breakdown };
 };
 
-// ------------------------------
-// CREATE BOOKING
-// ------------------------------
+
 exports.createBooking = async (req, res) => {
   const { userEmail, courtId, coachId, equipments = [], startTime, endTime } = req.body;
 
@@ -66,22 +62,22 @@ exports.createBooking = async (req, res) => {
     return res.status(400).json({ error: "Missing required fields" });
 
   try {
-    // 1️⃣ Find userId using email
+    
     const user = await prisma.user.findUnique({ where: { email: userEmail } });
     if (!user) return res.status(400).json({ error: "User not found" });
 
-    // 2️⃣ Get court
+   
     const court = await prisma.court.findUnique({ where: { id: courtId } });
     if (!court) return res.status(400).json({ error: "Court not found" });
 
-    // 3️⃣ Get coach
+   
     let coach = null;
     if (coachId) {
       coach = await prisma.coach.findUnique({ where: { id: coachId } });
       if (!coach) return res.status(400).json({ error: "Coach not found" });
     }
 
-    // 4️⃣ Prepare equipment list
+    
     const equipmentList = [];
     for (const e of equipments) {
       const eq = await prisma.equipment.findUnique({ where: { id: e.equipmentId } });
@@ -92,7 +88,7 @@ exports.createBooking = async (req, res) => {
     const start = new Date(startTime);
     const end = new Date(endTime);
 
-    // 5️⃣ Check court availability
+    
     const courtBusy = await prisma.booking.findFirst({
       where: {
         courtId,
@@ -102,7 +98,7 @@ exports.createBooking = async (req, res) => {
     });
     if (courtBusy) return res.status(400).json({ error: "Court already booked for this time" });
 
-    // 6️⃣ Check coach availability
+    
     if (coachId) {
       const coachBusy = await prisma.booking.findFirst({
         where: {
@@ -114,7 +110,7 @@ exports.createBooking = async (req, res) => {
       if (coachBusy) return res.status(400).json({ error: "Coach booked for this time" });
     }
 
-    // 7️⃣ Check equipment quantities
+    
     for (const eq of equipmentList) {
       const used = await prisma.bookingEquipment.aggregate({
         _sum: { quantity: true },
@@ -132,7 +128,7 @@ exports.createBooking = async (req, res) => {
         return res.status(400).json({ error: `${eq.name} not available in required quantity` });
     }
 
-    // 8️⃣ Calculate pricing
+    
     const { total, breakdown } = await calculatePrice({
       court,
       coach,
@@ -141,7 +137,7 @@ exports.createBooking = async (req, res) => {
       endTime
     });
 
-    // 9️⃣ Create booking transaction
+    
     const booking = await prisma.$transaction(async (tx) => {
       const newBooking = await tx.booking.create({
         data: {
@@ -176,9 +172,7 @@ exports.createBooking = async (req, res) => {
   }
 };
 
-// ------------------------------
-// GET USER BOOKINGS
-// ------------------------------
+
 exports.getUserBookings = async (req, res) => {
   const { userEmail } = req.params;
 

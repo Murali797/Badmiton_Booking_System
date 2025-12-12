@@ -9,7 +9,7 @@ export default function ResourceSelector({ selected, setSelected, courts, coache
 
   return (
     <div className="space-y-6">
-      {/* Court */}
+     
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-3">
           Select Court
@@ -33,7 +33,7 @@ export default function ResourceSelector({ selected, setSelected, courts, coache
         </div>
       </div>
 
-      {/* Coach */}
+    
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-3">
           Add Coach (Optional)
@@ -65,7 +65,7 @@ export default function ResourceSelector({ selected, setSelected, courts, coache
         </div>
       </div>
 
-      {/* Equipment */}
+      
       {equipment.length > 0 && (
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-3">

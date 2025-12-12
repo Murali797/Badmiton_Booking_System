@@ -1,7 +1,7 @@
 // controllers/ruleController.js
 const prisma = require('../config/db');
 
-// Get all pricing rules
+
 const getAll = async (req, res) => {
   try {
     const rules = await prisma.pricingRule.findMany({
@@ -13,7 +13,7 @@ const getAll = async (req, res) => {
   }
 };
 
-// Create a new pricing rule (for admin)
+
 const create = async (req, res) => {
   try {
     const rule = await prisma.pricingRule.create({
@@ -35,7 +35,7 @@ const create = async (req, res) => {
   }
 };
 
-// Update a rule
+
 const update = async (req, res) => {
   const { id } = req.params;
   try {
@@ -49,7 +49,6 @@ const update = async (req, res) => {
   }
 };
 
-// Delete (soft delete)
 const remove = async (req, res) => {
   const { id } = req.params;
   try {

@@ -4,23 +4,23 @@ const pricingEngine = require("./pricingEngine");
 async function createBooking(body) {
   const { userEmail, courtId, coachId, startTime, endTime, equipments = [] } = body;
 
-  // 1️⃣ Get the user from email
+ 
   const user = await prisma.user.findUnique({
     where: { email: userEmail }
   });
 
   if (!user) throw new Error("User not found");
 
-  // 2️⃣ Court lookup
+
   const court = await prisma.court.findUnique({ where: { id: courtId } });
   if (!court) throw new Error("Court not found");
 
-  // 3️⃣ Coach lookup
+  
   const coach = coachId
     ? await prisma.coach.findUnique({ where: { id: coachId } })
     : null;
 
-  // 4️⃣ Equipment lookup
+  
   const equipmentRecords = [];
   const equipmentDetails = [];
 
@@ -34,7 +34,7 @@ async function createBooking(body) {
     });
   }
 
-  // 5️⃣ Pricing rules
+  
   const pricingRules = await prisma.pricingRule.findMany({
     where: { isActive: true }
   });
@@ -51,10 +51,10 @@ async function createBooking(body) {
     end
   });
 
-  // 6️⃣ Create booking (now using userId)
+
   const booking = await prisma.booking.create({
     data: {
-      userId: user.id,                // ✅ Correct
+      userId: user.id,                
       courtId,
       coachId: coachId || null,
       startTime: start,

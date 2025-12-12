@@ -8,7 +8,7 @@ import BookingPage from "./pages/BookingPage";
 import MyBookings from "./pages/MyBookings";
 import AdminDashboard from "./pages/AdminDashboard";
 import LoginRegister from "./pages/LoginRegister";
-import ProtectedRoute from "./utils/ProtectedRoute"; // <-- new
+import ProtectedRoute from "./utils/ProtectedRoute"; 
 
 export default function App() {
   return (
@@ -16,12 +16,12 @@ export default function App() {
       <Sidebar />
       <div className="flex-1 flex flex-col">
         <Navbar />
-        <main className="flex-1 ml-0 md:ml-64"> {/* This fixes your sidebar overlap */}
+        <main className="flex-1 ml-0 md:ml-64"> 
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/auth" element={<LoginRegister />} />
 
-            {/* Protected Routes - Only accessible if logged in */}
+            
             <Route
               path="/booking"
               element={

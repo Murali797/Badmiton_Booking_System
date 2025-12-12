@@ -1,5 +1,5 @@
 import React from "react";
-import { CalendarDays, Clock } from "lucide-react"; // Optional: npm i lucide-react  OR just use emojis below
+import { CalendarDays, Clock } from "lucide-react"; 
 
 export default function DateSelector({ selected, setSelected }) {
   return (
@@ -33,7 +33,7 @@ export default function DateSelector({ selected, setSelected }) {
             setSelected({
               ...selected,
               duration: Number(e.target.value),
-              endTime: null, // reset time when duration changes
+              endTime: null, 
             })
           }
         >

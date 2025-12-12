@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 
 export default function TimeSlotGrid({ selected, setSelected }) {
   const date = selected.date || dayjs().format("YYYY-MM-DD");
-  const slots = Array.from({ length: 15 }, (_, i) => i + 6); // 6 AM to 8 PM
+  const slots = Array.from({ length: 15 }, (_, i) => i + 6); 
 
   const getSlotLabel = (hour) => {
     const period = hour >= 12 ? "PM" : "AM";

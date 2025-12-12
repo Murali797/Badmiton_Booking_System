@@ -16,7 +16,7 @@ export default function LoginRegister() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // If user came from a protected page (e.g. clicked "Book Now"), remember it
+ 
   const from = location.state?.from || "/booking";
 
   const handleSubmit = async (e) => {
@@ -34,14 +34,13 @@ export default function LoginRegister() {
         res = await auth.register(form);
       }
 
-      // Save auth data
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      // Success message
+    
       alert(tab === "login" ? "Welcome back!" : "Account created & logged in!");
 
-      // Redirect to where they originally wanted to go
+
       navigate(from, { replace: true });
     } catch (err) {
       const msg = err.response?.data?.error || err.message || "Something went wrong";
@@ -51,7 +50,7 @@ export default function LoginRegister() {
     }
   };
 
-  // Auto-switch to register tab if user came from signup button
+
   useEffect(() => {
     if (location.state?.register) {
       setTab("register");
@@ -62,13 +61,13 @@ export default function LoginRegister() {
     <div className="min-h-screen  from-indigo-50 to-purple-50 pt-20">
       <div className="flex justify-center">
         <div className="w-full max-w-md">
-          {/* Card */}
+         
           <div className="bg-white rounded-2xl shadow-xl p-8">
             <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
               {tab === "login" ? "Welcome Back" : "Create Account"}
             </h2>
 
-            {/* Tabs */}
+          
             <div className="flex mb-8 bg-gray-100 rounded-xl p-1">
               <button
                 onClick={() => setTab("login")}
@@ -93,7 +92,7 @@ export default function LoginRegister() {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Name - only in register */}
+             
               {tab === "register" && (
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -110,7 +109,7 @@ export default function LoginRegister() {
                 </div>
               )}
 
-              {/* Email */}
+             
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Email Address
@@ -125,7 +124,7 @@ export default function LoginRegister() {
                 />
               </div>
 
-              {/* Password */}
+            
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Password
@@ -140,7 +139,7 @@ export default function LoginRegister() {
                 />
               </div>
 
-              {/* Role - only register */}
+              
               {tab === "register" && (
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -157,7 +156,7 @@ export default function LoginRegister() {
                 </div>
               )}
 
-              {/* Submit Button */}
+           
               <button
                 type="submit"
                 disabled={loading}
@@ -175,7 +174,6 @@ export default function LoginRegister() {
               </button>
             </form>
 
-            {/* Extra help text */}
             <p className="text-center text-sm text-gray-600 mt-6">
               {tab === "login" ? (
                 <>

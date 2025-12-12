@@ -4,7 +4,7 @@ import { Navigate, useLocation } from "react-router-dom";
 
 const isAuthenticated = () => {
   const token = localStorage.getItem("token");
-  return !!token; // true if token exists
+  return !!token; 
 };
 
 export default function ProtectedRoute({ children }) {

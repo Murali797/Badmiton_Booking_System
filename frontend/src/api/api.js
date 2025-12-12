@@ -5,7 +5,7 @@ const API = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
-// attach token automatically if present
+
 API.interceptors.request.use((cfg) => {
   const token = localStorage.getItem("token");
   if (token) cfg.headers.Authorization = `Bearer ${token}`;
@@ -14,7 +14,7 @@ API.interceptors.request.use((cfg) => {
 
 export default API;
 
-/* convenience helpers */
+
 export const auth = {
   register: (data) => API.post("/auth/register", data),
   login: (data) => API.post("/auth/login", data),
