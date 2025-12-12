@@ -27,32 +27,28 @@ export default function Home() {
     <div className="min-h-screen  from-indigo-50 via-white to-purple-50">
       <div>
         
-        <section className="pt-24 pb-16 px-6 text-center">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
-              Book Badminton Courts<br />
-              <span className="text-indigo-600">Instantly</span>
-            </h1>
-            <p className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto">
-              Courts • Coaches • Equipment — all in one place.
-            </p>
+        <section className="pt-32 pb-20 px-6 text-center bg-gradient-to-b from-indigo-50 to-white">
+  <div className="max-w-5xl mx-auto">
+    <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-gray-900 leading-tight">
+      Book Badminton Courts<br />
+      <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+        Instantly & Hassle-Free
+      </span>
+    </h1>
+    <p className="mt-6 text-xl sm:text-2xl text-gray-600 max-w-3xl mx-auto">
+      Courts • Coaches • Equipment — everything in one app.
+    </p>
 
-            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onClick={handleBookNow}
-                className="px-8 py-4 bg-indigo-600 text-white font-semibold text-lg rounded-xl hover:bg-indigo-700 transition shadow-lg"
-              >
-                Book a Court Now
-              </button>
-              <button
-                onClick={handleBookNow}
-                className="px-8 py-4 bg-white text-indigo-600 font-semibold text-lg rounded-xl border-2 border-indigo-600 hover:bg-indigo-50 transition"
-              >
-                Find a Coach
-              </button>
-            </div>
-          </div>
-        </section>
+    <div className="mt-12 flex flex-col sm:flex-row gap-6 justify-center">
+      <button onClick={handleBookNow} className="px-10 py-5 bg-indigo-600 text-white text-xl font-bold rounded-2xl shadow-2xl hover:shadow-indigo-500/50 transform hover:scale-105 transition">
+        Book Now
+      </button>
+      <button onClick={handleBookNow} className="px-10 py-5 bg-white text-indigo-600 border-4 border-indigo-600 text-xl font-bold rounded-2xl hover:bg-indigo-50 transition">
+        Find a Coach
+      </button>
+    </div>
+  </div>
+</section>
 
        
 <section className="py-20 bg-indigo-600 text-center text-white -mx-6 md:-mx-12 lg:-mx-24 xl:-mx-32 2xl:mx-0">
