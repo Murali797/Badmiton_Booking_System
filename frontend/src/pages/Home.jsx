@@ -27,11 +27,11 @@ export default function Home() {
     <div className="min-h-screen  from-indigo-50 via-white to-purple-50">
       <div>
         
-        <section className="pt-32 pb-20 px-6 text-center bg-gradient-to-b from-indigo-50 to-white">
+        <section className="pt-32 pb-20 px-6 text-center from-indigo-50 to-white">
   <div className="max-w-5xl mx-auto">
     <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-gray-900 leading-tight">
       Book Badminton Courts<br />
-      <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+      <span className="text-transparent bg-clip-text from-indigo-600 to-purple-600">
         Instantly & Hassle-Free
       </span>
     </h1>
